@@ -1,29 +1,65 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, useColorScheme, View } from 'react-native';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+// Amplify v6 config
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+
+// Auth helpers
+import { getCurrentUser } from 'aws-amplify/auth';
+
+// Hosted-UI needs this on Expo
+import * as WebBrowser from 'expo-web-browser';
+WebBrowser.maybeCompleteAuthSession(); // <- important for Android/Expo
+
+Amplify.configure(config);
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const [ready, setReady] = useState(false);
+  const [authed, setAuthed] = useState(false);
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
+  useEffect(() => {
+    (async () => {
+      try {
+        await getCurrentUser(); // throws if not logged in
+        setAuthed(true);
+      } catch {
+        setAuthed(false);
+      } finally {
+        setReady(true);
+      }
+    })();
+  }, []);
+
+  if (!ready) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
+  // Render different stacks based on auth instead of Redirect loops
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+      <Stack screenOptions={{ headerShown: false }}>
+        {authed ? (
+          // ✅ Authenticated area
+          <>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="+not-found" />
+          </>
+        ) : (
+          // ✅ Public/auth screens
+          <>
+            <Stack.Screen name="login" />
+            <Stack.Screen name="signup" options={{ headerShown: true, title: 'Create account' }} />
+          </>
+        )}
       </Stack>
-      <StatusBar style="auto" />
     </ThemeProvider>
   );
 }

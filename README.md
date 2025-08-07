@@ -1,12 +1,13 @@
 # 📚 Daily English App
 
-An interactive mobile learning app to boost your English daily — inspired by *LinkedIn’s “Today’s Puzzles”*, but focused on reading, vocabulary, and grammar.
+An interactive mobile learning app to boost your English daily — inspired by _LinkedIn’s “Today’s Puzzles”_, but focused on reading, vocabulary, and grammar.
 
 Built with **React Native (Expo)** and powered by **AWS Serverless** + **OpenAI**, it delivers fresh content and quizzes every day.
 
 ---
 
 ## ✨ Key Features
+
 - **Daily AI-Generated Passage** – Unique, varied difficulty using OpenAI.
 - **Auto-Generated Quizzes** – Comprehension, vocabulary, and grammar checks.
 - **Multiple Login Options** – Google or native signup (username, email, phone) via AWS Cognito.
@@ -17,6 +18,7 @@ Built with **React Native (Expo)** and powered by **AWS Serverless** + **OpenAI*
 ---
 
 ## 🛠 Tech Stack
+
 - **Frontend** – React Native (Expo), Styled Components
 - **Backend** – AWS Lambda, API Gateway
 - **Database** – AWS DynamoDB
@@ -27,6 +29,7 @@ Built with **React Native (Expo)** and powered by **AWS Serverless** + **OpenAI*
 ---
 
 ## 🎯 Vision
+
 Transform daily English learning into a **quick, fun 5–10 min habit**.  
 Whether for exams, work, or personal growth — this app makes progress **consistent, interactive, and AI-powered**.
 
@@ -42,7 +45,13 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Update aws-exports.js
+
+   ```bash
+   cp src/aws-exports.example.js src/aws-exports.js
+   ```
+
+3. Start the app
 
    ```bash
    npx expo start
