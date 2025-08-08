@@ -18,7 +18,7 @@ export default function LoginScreen() {
             // Hosted UI redirect (Google)
             await signInWithRedirect({ provider: 'Google' });
         } catch (e: any) {
-            console.error(e);
+            console.error('onGoogle', e);
             Alert.alert('Google login failed', e?.message ?? 'Unknown error');
         }
     }
@@ -26,7 +26,7 @@ export default function LoginScreen() {
     async function onNativeLogin() {
         try {
             await signIn({ username, password });
-            router.replace('/'); // go to app after login
+            router.replace('/(tabs)'); // go to app after login
         } catch (e: any) {
             console.error(e);
             Alert.alert('Login failed', e?.message ?? 'Unknown error');

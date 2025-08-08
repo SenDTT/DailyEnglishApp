@@ -30,7 +30,7 @@ export default function ProfileScreen() {
                 await getCurrentUser(); // throws if not logged in
                 const a = await fetchUserAttributes(); // a: UserAttrs
                 setAttrs(a);
-            } catch {
+            } catch (err) {
                 router.replace('/login');
             } finally {
                 setLoading(false);
@@ -41,9 +41,11 @@ export default function ProfileScreen() {
     async function onLogout() {
         try {
             await signOut();
-            router.replace('/login');
         } catch (e) {
             console.log('Sign out error:', e);
+        } finally {
+            console.log('onLogout - finally');
+            router.navigate('/login');
         }
     }
 
