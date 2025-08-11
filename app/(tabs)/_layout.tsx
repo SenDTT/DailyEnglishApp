@@ -20,14 +20,15 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarShowLabel: false,
-        tabBarLabelStyle: { paddingBottom: 0 },
-        tabBarItemStyle: { paddingBottom: 0 },
+        tabBarItemStyle: { justifyContent: 'center' },
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
+            justifyContent: 'center'
           },
           default: {
+            justifyContent: 'center'
           },
         }),
       }}>
