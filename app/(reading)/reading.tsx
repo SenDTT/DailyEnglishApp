@@ -10,6 +10,7 @@ import { fetchAuthSession } from "aws-amplify/auth";
 import axios from 'axios';
 import Constants from 'expo-constants';
 import { useFocusEffect, useRouter } from 'expo-router';
+import * as Speech from "expo-speech";
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import TopNavLayout from './TopNavLayout';
@@ -94,6 +95,8 @@ export default function HomeScreen() {
     const confirmLeave = () => {
         setShowExit(false);
         router.push('/(tabs)');
+
+        Speech.stop();
     };
     const stayHere = () => setShowExit(false);
 

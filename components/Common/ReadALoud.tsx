@@ -1,9 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { useTTS } from "../ui/useTTS";
 
 export default function ReadAloud({ text }: { text: string }) {
     const { speak, stop, speaking } = useTTS({ language: "en-US" });
+
+    useEffect(() => {
+        return () => {
+            stop(); // <-- stop when leaving this view
+        };
+    }, [stop]);
 
     return (
         <TouchableOpacity
