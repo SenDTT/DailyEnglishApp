@@ -1,6 +1,7 @@
 import { ReadingData } from "@/app/(reading)/reading";
 import { useState } from "react";
 import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import ScoreRing from "../Common/ScoreRing";
 import SuggestionsView, { SuggestionsPayload } from "../Common/SuggestionView";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
@@ -28,10 +29,12 @@ export default function ResultAndReview({
             {/* Header + Score */}
             <ThemedText type="subtitle">{title ?? "Results"}</ThemedText>
             <View style={styles.summaryRow}>
-                <View style={styles.scoreCircle}>
-                    <ThemedText style={styles.largeMuted} type="title">{Math.round((score / data.quiz.length) * 100)}%</ThemedText>
-                    <ThemedText style={styles.smallMuted}>{score}/{data.quiz.length}</ThemedText>
-                </View>
+                <ScoreRing
+                    score={score}
+                    total={data.quiz.length}
+                    progressColor="#22c55e" // optional
+                    trackColor="#e5e7eb"    // optional
+                />
 
                 <View style={{ flex: 1, gap: 6 }}>
                     <ThemedText style={{ opacity: 0.8 }}>
