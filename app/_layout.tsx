@@ -12,6 +12,7 @@ import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 
 // Hosted-UI needs this on Expo
 import * as WebBrowser from 'expo-web-browser';
+import { AuthProvider } from './context/AuthContext';
 if (Platform.OS !== 'web') WebBrowser.maybeCompleteAuthSession();
 
 Amplify.configure({
@@ -82,10 +83,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       {authed ? (
-        <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <AuthProvider>
+          <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </AuthProvider>
       ) : (
         <Stack screenOptions={{ headerShown: false }} initialRouteName="login">
           {/* make sure app/login.tsx and app/signup.tsx exist */}

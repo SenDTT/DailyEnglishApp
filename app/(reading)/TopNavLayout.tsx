@@ -31,7 +31,9 @@ export default function TopNavLayout({
             <View style={styles.container}>
                 {/* Top bar */}
                 <View style={[styles.topBar, { backgroundColor: Colors[colorScheme ?? 'light'].background }]}>
-                    <Button text="Back" onPress={onBack || (() => router.back())} disabled={!onBack} />
+                    {stage !== "submitted" && (
+                        <Button text="Back" onPress={onBack || (() => router.back())} disabled={!onBack} />
+                    )}
 
                     {stage !== "submitted" ? (
                         <Button

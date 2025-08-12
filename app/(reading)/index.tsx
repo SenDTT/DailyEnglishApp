@@ -9,7 +9,9 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import TopNavLayout from './TopNavLayout';
+import { SuggestionsPayload } from '@/components/Common/SuggestionView';
 
 const API_BASE: string =
     (Constants.expoConfig?.extra as any)?.API_BASE ??
@@ -38,15 +40,18 @@ export default function HomeScreen() {
         vocabulary: [],
         quiz: [],
     });
+    const { token } = useAuth();
 
     // "intro" | "passage" | "question" | "submitted"
     const [stage, setStage] = useState<"passage" | "question" | "submitted">("passage");
     const [loading, setLoading] = useState<boolean>(true);
     const [qIndex, setQIndex] = useState<number>(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
+    const [selectedAnswer, setSelectedAnswer] = useState<boolean>(false);
     const [showExit, setShowExit] = useState(false);
     const [showSubmit, setShowSubmit] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    const [suggestions, setSuggestions] = useState<SuggestionsPayload | null>(null);
 
     const unansweredIdx =
         data ? data.quiz.map((_, i) => (answers[i] ? -1 : i)).filter(i => i !== -1) : [];
@@ -65,8 +70,20 @@ export default function HomeScreen() {
     const confirmSubmit = async () => {
         setSubmitting(true);
         try {
-            // (Optional) call API to save results here
-            // await api.save({ answers, score: ... });
+            const allScore = Object.entries(answers).reduce((acc, [i, val]) => (data.quiz[Number(i)].answer === val.charAt(0) ? acc + 1 : acc), 0);
+            const response = await axios.post(API_BASE + '/submitResult', { score: allScore, answers: Object.values(answers) }, {
+                headers: {
+                    Authorization: 'Bearer ' + (token ?? ""),
+                },
+            });
+
+            console.log(response, token);
+
+            if (!response.status) throw new Error(`HTTP error ${response.status}`);
+            const body = await response.data;
+
+            console.log(body);
+            setSuggestions(body.suggestions);
 
             setStage("submitted");
         } finally {
@@ -111,6 +128,7 @@ export default function HomeScreen() {
     }
 
     const onSelect = (choice: string) => {
+        setSelectedAnswer(true);
         setAnswers(prev => ({ ...prev, [qIndex]: choice }));
     };
 
@@ -141,10 +159,15 @@ export default function HomeScreen() {
         }
         // stage === "question"
         if (qIndex < data.quiz.length - 1) {
+            if (!selectedAnswer) {
+                setAnswers(prev => ({ ...prev, [qIndex]: '' }));
+            }
             setQIndex(qIndex + 1);
+            setSelectedAnswer(false);
         } else {
             // last question → submit
             openSubmitModal();
+            console.log(answers);
         }
     };
 
@@ -234,8 +257,8 @@ export default function HomeScreen() {
                 </ThemedView>
             )}
 
-            {stage === "submitted" && data && (
-                <ResultAndReview data={data} score={score} answers={answers} />
+            {stage === "submitted" && data && suggestions && (
+                <ResultAndReview data={data} score={score} answers={answers} suggestions={suggestions} />
             )}
 
             <Modal

@@ -1,19 +1,24 @@
 import { ReadingData } from "@/app/(reading)";
 import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import SuggestionsView, { SuggestionsPayload } from "../Common/SuggestionView";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
 
 export default function ResultAndReview({
     data,
     score,
-    answers
+    answers,
+    suggestions,
 }: {
     data: ReadingData;
     score: number;
     answers: Record<number, string>;
+    suggestions: SuggestionsPayload;
 }) {
     const [showOnlyIncorrect, setShowOnlyIncorrect] = useState(false);
+    const [open, setOpen] = useState(false);
+
     return (
         <ThemedView style={[styles.card, { gap: 12 }]}>
             {/* Header + Score */}
@@ -105,6 +110,16 @@ export default function ResultAndReview({
                         </ThemedView>
                     ))}
             </View>
+
+            <View style={styles.controls}>
+                <TouchableOpacity onPress={() => setOpen(true)} style={[styles.mBtn, styles.mBtnSecondary]}>
+                    <ThemedText>See Suggestions</ThemedText>
+                </TouchableOpacity>
+            </View>
+
+            <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
+                <SuggestionsView suggestions={suggestions} onClose={() => setOpen(false)} />
+            </Modal>
         </ThemedView>
     )
 }

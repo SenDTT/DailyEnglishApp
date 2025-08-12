@@ -5,11 +5,11 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { fetchAuthSession } from "aws-amplify/auth";
 import axios from 'axios';
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const API_BASE: string =
   (Constants.expoConfig?.extra as any)?.API_BASE ??
@@ -20,6 +20,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
   const [todayResult, setTodayResult] = useState(null);
   const [hasResult, setHasResult] = useState(false);
+  const { token } = useAuth();
 
   useEffect(() => {
     if (loading) {
@@ -29,9 +30,6 @@ export default function HomeScreen() {
 
   const fetchTodayResult = async () => {
     try {
-      const session = await fetchAuthSession();
-      const token = session.tokens?.accessToken?.toString() || session.tokens?.idToken?.toString();
-
       const response = await axios.get(`${API_BASE}/getTodayQuizAndResult`, {
         headers: {
           Authorization: 'Bearer ' + (token ?? ""),
