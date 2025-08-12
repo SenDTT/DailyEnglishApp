@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
-import { useTTS } from "../ui/useTTS";
+import { useTTS } from "../../hooks/useTTS";
 
 export default function ReadAloud({ text }: { text: string }) {
     const { speak, stop, speaking } = useTTS({ language: "en-US" });
@@ -21,10 +21,7 @@ export default function ReadAloud({ text }: { text: string }) {
             style={{ padding: 12, borderRadius: 12 }}
         >
             <Ionicons
-                // Option A: speaker vs stop
                 name={speaking ? "stop-circle" : "volume-high"}
-                // Option B (round buttons): "play-circle" when idle
-                // name={speaking ? "stop-circle" : "play-circle"}
                 size={26}
             />
         </TouchableOpacity>
