@@ -11,10 +11,14 @@ export default function SuggestionsView({
     suggestions,
     onClose,
     title = "Study Suggestions",
+    passage = null,
+    passageTitle = null, // optional passage title for context
 }: {
     suggestions: SuggestionsPayload;
     onClose?: () => void;
     title?: string;
+    passage?: string | null; // optional passage text for context,
+    passageTitle: string | null; // optional title for the passage
 }) {
     const hasVocab = suggestions?.vocabulary?.length > 0;
     const hasTip = !!suggestions?.grammarTip;
@@ -33,6 +37,16 @@ export default function SuggestionsView({
                     </View>
                     {onClose && <Ionicons name="close" size={22} onPress={onClose} />}
                 </ThemedView>
+
+
+                {passage && (
+                    <ThemedView style={styles.card}>
+                        <ThemedText type="subtitle" style={{ marginBottom: 8 }}>
+                            {passageTitle || "Reading Passage"}
+                        </ThemedText>
+                        <ThemedText style={styles.passage}>{passage}</ThemedText>
+                    </ThemedView>
+                )}
 
                 {/* Vocabulary */}
                 <ThemedView style={styles.card}>
@@ -93,4 +107,5 @@ const styles = StyleSheet.create({
     },
     definition: { opacity: 0.85, marginTop: 2 },
     tipRow: { flexDirection: "row", gap: 8, alignItems: "flex-start" },
+    passage: { lineHeight: 22 },
 });

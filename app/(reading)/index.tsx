@@ -1,5 +1,6 @@
 import { ActivityIndicator, BackHandler, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { SuggestionsPayload } from '@/components/Common/SuggestionView';
 import ModalSubmitConfirm from '@/components/Reading/ModalSubmitConfirm';
 import ResultAndReview from '@/components/Reading/ResultAndReview';
 import { ThemedText } from '@/components/ThemedText';
@@ -11,7 +12,6 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import TopNavLayout from './TopNavLayout';
-import { SuggestionsPayload } from '@/components/Common/SuggestionView';
 
 const API_BASE: string =
     (Constants.expoConfig?.extra as any)?.API_BASE ??
@@ -25,7 +25,7 @@ export interface ReadingData {
     quiz: IQuizObject[],
 }
 
-interface IQuizObject {
+export interface IQuizObject {
     question: string,
     options: string[],
     answer: string,
@@ -77,8 +77,6 @@ export default function HomeScreen() {
                 },
             });
 
-            console.log(response, token);
-
             if (!response.status) throw new Error(`HTTP error ${response.status}`);
             const body = await response.data;
 
@@ -94,7 +92,7 @@ export default function HomeScreen() {
 
     const confirmLeave = () => {
         setShowExit(false);
-        router.push('(tabs)');
+        router.push('/(tabs)');
     };
     const stayHere = () => setShowExit(false);
 

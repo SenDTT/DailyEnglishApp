@@ -10,11 +10,15 @@ export default function ResultAndReview({
     score,
     answers,
     suggestions,
+    title,
+    isShowPassages = false,
 }: {
     data: ReadingData;
     score: number;
     answers: Record<number, string>;
     suggestions: SuggestionsPayload;
+    title?: string;
+    isShowPassages?: boolean; // optional prop to show/hide passages
 }) {
     const [showOnlyIncorrect, setShowOnlyIncorrect] = useState(false);
     const [open, setOpen] = useState(false);
@@ -22,7 +26,7 @@ export default function ResultAndReview({
     return (
         <ThemedView style={[styles.card, { gap: 12 }]}>
             {/* Header + Score */}
-            <ThemedText type="subtitle">Results</ThemedText>
+            <ThemedText type="subtitle">{title ?? "Results"}</ThemedText>
             <View style={styles.summaryRow}>
                 <View style={styles.scoreCircle}>
                     <ThemedText style={styles.largeMuted} type="title">{Math.round((score / data.quiz.length) * 100)}%</ThemedText>
@@ -118,7 +122,7 @@ export default function ResultAndReview({
             </View>
 
             <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
-                <SuggestionsView suggestions={suggestions} onClose={() => setOpen(false)} />
+                <SuggestionsView suggestions={suggestions} passageTitle={isShowPassages ? data.title : null} passage={isShowPassages ? data.passage : null} onClose={() => setOpen(false)} />
             </Modal>
         </ThemedView>
     )
