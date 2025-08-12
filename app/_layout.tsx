@@ -46,8 +46,8 @@ export default function RootLayout() {
         await getCurrentUser(); // throws if not logged in
 
         const user = await fetchUserAttributes(); // a: UserAttrs
-        console.log('fetchUserAttributes', user);
-        setAuthed(true);
+
+        if (user) setAuthed(true);
         if (onAuthRoute) router.replace('/(tabs)');
       } catch (err) {
         setAuthed(false);

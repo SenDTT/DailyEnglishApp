@@ -3,6 +3,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import PassageReadAlong from "./PassageReadAlong";
 
 type Suggestion = { word: string; definition: string };
 export type SuggestionsPayload = { vocabulary: Suggestion[]; grammarTip: string };
@@ -44,7 +45,7 @@ export default function SuggestionsView({
                         <ThemedText type="subtitle" style={{ marginBottom: 8 }}>
                             {passageTitle || "Reading Passage"}
                         </ThemedText>
-                        <ThemedText style={styles.passage}>{passage}</ThemedText>
+                        <PassageReadAlong text={passage} />
                     </ThemedView>
                 )}
 
