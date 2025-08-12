@@ -1,5 +1,6 @@
 import { ActivityIndicator, BackHandler, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import ReadAloud from '@/components/Common/ReadALoud';
 import { SuggestionsPayload } from '@/components/Common/SuggestionView';
 import ModalSubmitConfirm from '@/components/Reading/ModalSubmitConfirm';
 import ResultAndReview from '@/components/Reading/ResultAndReview';
@@ -232,6 +233,7 @@ export default function HomeScreen() {
 
             {stage === "passage" && (
                 <ThemedView style={styles.card}>
+                    <ReadAloud text={data.passage} />
                     <ThemedText style={styles.passage}>{data.passage}</ThemedText>
                 </ThemedView>
             )}

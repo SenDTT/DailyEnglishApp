@@ -1,4 +1,4 @@
-import { ReadingData } from "@/app/(reading)";
+import { ReadingData } from "@/app/(reading)/reading";
 import { useState } from "react";
 import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import SuggestionsView, { SuggestionsPayload } from "../Common/SuggestionView";

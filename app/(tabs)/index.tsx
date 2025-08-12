@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Pressable, StyleSheet } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
 
 import { SuggestionsPayload } from '@/components/Common/SuggestionView';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -10,7 +10,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { IQuizObject } from '../(reading)';
+import { IQuizObject } from '../(reading)/reading';
 import { useAuth } from '../context/AuthContext';
 
 const API_BASE: string =
@@ -46,6 +46,7 @@ export default function HomeScreen() {
 
   const fetchTodayResult = async () => {
     try {
+      console.log("Fetching today's result...", token);
       const response = await axios.get(`${API_BASE}/getTodayQuizAndResult`, {
         headers: {
           Authorization: 'Bearer ' + (token ?? ""),
@@ -77,7 +78,7 @@ export default function HomeScreen() {
   }
 
   const handleStartQuiz = () => {
-    router.push("/(reading)");
+    router.push("/reading");
   };
 
   return (
@@ -99,6 +100,13 @@ export default function HomeScreen() {
           ? "Great job showing up today! Check your progress below."
           : "Ready to boost your English today? Let’s get started!"}
       </ThemedText>
+
+      {loading && (
+        <ThemedView style={[styles.center, { padding: 24 }]}>
+          <ActivityIndicator size="large" />
+          <ThemedText style={{ marginTop: 12 }}>Loading…</ThemedText>
+        </ThemedView>
+      )}
 
       {/* Action button */}
       {!loading && !hasResult && (
@@ -141,6 +149,7 @@ const styles = StyleSheet.create({
     gap: 8,
     justifyContent: 'center'
   },
+  center: { alignItems: "center", justifyContent: "center" },
   stepContainer: {
     gap: 8,
     marginBottom: 8,

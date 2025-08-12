@@ -73,29 +73,31 @@ export default function RootLayout() {
 
   if (!ready) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
-      </View>
+      <AuthProvider>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      </AuthProvider>
     );
   }
 
   // Render different stacks based on auth instead of Redirect loops
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {authed ? (
-        <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        {authed ? (
           <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="+not-found" />
           </Stack>
-        </AuthProvider>
-      ) : (
-        <Stack screenOptions={{ headerShown: false }} initialRouteName="login">
-          {/* make sure app/login.tsx and app/signup.tsx exist */}
-          <Stack.Screen name="login" />
-          <Stack.Screen name="signup" options={{ headerShown: true, title: 'Create account' }} />
-        </Stack>
-      )}
-    </ThemeProvider>
+        ) : (
+          <Stack screenOptions={{ headerShown: false }} initialRouteName="login">
+            {/* make sure app/login.tsx and app/signup.tsx exist */}
+            <Stack.Screen name="login" />
+            <Stack.Screen name="signup" options={{ headerShown: true, title: 'Create account' }} />
+          </Stack>
+        )}
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
