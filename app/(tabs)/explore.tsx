@@ -1,110 +1,173 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+// ResultListScreen.tsx
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
+import axios from "axios";
+import Constants from "expo-constants";
+import { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, TouchableOpacity, View } from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
+import ScoreRing from "../../components/Common/ScoreRing";
+import { useAuth } from "../context/AuthContext";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const API_BASE: string =
+  (Constants.expoConfig?.extra as any)?.API_BASE ??
+  (Constants.manifest2?.extra as any)?.API_BASE;
 
-export default function TabTwoScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
+type ResultItem = {
+  userId: string;
+  date: string;
+  title: string;
+  clientScore: number;
+  total: number;
+  createdAt: string; // ISO
+};
+
+const ACTIONS_WIDTH = 60; // how far to swipe left to fully show the actions
+
+export default function ResultListScreen({ navigation }: any) {
+  const [items, setItems] = useState<ResultItem[]>([]);
+  const [cursor, setCursor] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const { token } = useAuth();
+
+  const fetchPage = useCallback(
+    async (next?: string | null, pageSize = 20) => {
+      setLoading(true);
+      try {
+        const res = await axios.get(`${API_BASE}/getAllResults`, {
+          params: { limit: pageSize, cursor: next ?? undefined },
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = res.data as { items: ResultItem[]; cursor: string | null };
+        setItems((prev) => (next ? [...prev, ...data.items] : data.items));
+        setCursor(data.cursor);
+      } catch (e) {
+        console.log("Fetch results error:", e);
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
+      }
+    },
+    [token]
+  );
+
+  const refresh = useCallback(() => {
+    setRefreshing(true);
+    setCursor(null);
+    fetchPage(null);
+  }, [fetchPage]);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  const onEnd = useCallback(() => {
+    if (!loading && cursor) fetchPage(cursor);
+  }, [loading, cursor, fetchPage]);
+
+  const rowKey = (it: ResultItem) => it.userId + it.date;
+
+  const FrontRow = ({ it }: { it: ResultItem }) => {
+    const pct = Math.round((it.total ? it.clientScore / it.total : 0) * 100);
+    return (
+      <ThemedView
+        style={{
+          padding: 12,
+          marginBottom: 10,
+          borderBottomWidth: 1,
+          borderBottomColor: "#eee",
+          backgroundColor: "white",
+        }}
+      >
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+          <ScoreRing score={it.clientScore} total={it.total} size={40} strokeWidth={6} showText={false} />
+          <View style={{ flex: 1 }}>
+            <ThemedText type="subtitle" style={{ fontSize: 18 }}>
+              {it.date}
             </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+            <ThemedText style={{ opacity: 0.6, marginTop: 2 }}>
+              {it.clientScore} / {it.total} ({pct}%)
+            </ThemedText>
+          </View>
+          {/* no arrow; swipe to reveal actions */}
+        </View>
+      </ThemedView>
+    );
+  };
+
+  const HiddenRow = ({ it, close }: { it: ResultItem; close: () => void }) => (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        paddingRight: 12,
+        gap: 8,
+        backgroundColor: Colors.light.tint,
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "#eee",
+      }}
+    >
+      <TouchableOpacity
+        onPress={() => {
+          close();
+          navigation.navigate("ResultDetail", { resultId: rowKey(it) });
+        }}
+        style={{
+          paddingVertical: 7,
+          paddingHorizontal: 7,
+          borderRadius: 10,
+          backgroundColor: "#f1f1f1",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        <Ionicons color={Colors.light.tint} name="eye-outline" size={20} />
+      </TouchableOpacity>
+    </View>
+  );
+
+  return (
+    <ThemedView style={{ flex: 1, padding: 0 }}>
+      <SwipeListView
+        data={items}
+        keyExtractor={rowKey}
+        renderItem={({ item }) => <FrontRow it={item} />}
+        renderHiddenItem={({ item }, rowMap) => {
+          const key = rowKey(item);
+          const close = () => rowMap[key]?.closeRow?.();
+          return <HiddenRow it={item} close={close} />;
+        }}
+        // Infinite scroll + refresh
+        onEndReached={onEnd}
+        onEndReachedThreshold={0.2}
+        refreshing={refreshing}
+        onRefresh={refresh}
+        ListFooterComponent={
+          loading ? (
+            <View style={{ paddingVertical: 16 }}>
+              <ActivityIndicator />
+            </View>
+          ) : null
+        }
+        contentContainerStyle={{ paddingBottom: 24 }}
+        // Swipe behavior
+        disableLeftSwipe={false}
+        disableRightSwipe={true}
+        rightOpenValue={-ACTIONS_WIDTH}
+        stopRightSwipe={-ACTIONS_WIDTH}
+        closeOnRowOpen
+        closeOnRowBeginSwipe
+        closeOnRowPress
+        friction={12}
+        tension={40}
+      />
+    </ThemedView>
   );
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});

@@ -2,6 +2,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { Stack, usePathname, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Platform, useColorScheme, View } from 'react-native';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Amplify v6 config
 import { Amplify } from 'aws-amplify';
@@ -84,20 +85,22 @@ export default function RootLayout() {
   // Render different stacks based on auth instead of Redirect loops
   return (
     <AuthProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {authed ? (
-          <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        ) : (
-          <Stack screenOptions={{ headerShown: false }} initialRouteName="login">
-            {/* make sure app/login.tsx and app/signup.tsx exist */}
-            <Stack.Screen name="login" />
-            <Stack.Screen name="signup" options={{ headerShown: true, title: 'Create account' }} />
-          </Stack>
-        )}
-      </ThemeProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          {authed ? (
+            <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          ) : (
+            <Stack screenOptions={{ headerShown: false }} initialRouteName="login">
+              {/* make sure app/login.tsx and app/signup.tsx exist */}
+              <Stack.Screen name="login" />
+              <Stack.Screen name="signup" options={{ headerShown: true, title: 'Create account' }} />
+            </Stack>
+          )}
+        </ThemeProvider>
+      </GestureHandlerRootView>
     </AuthProvider>
   );
 }
