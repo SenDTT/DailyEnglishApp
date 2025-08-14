@@ -89,7 +89,8 @@ const s = StyleSheet.create({
     divider: { color: '#888' },
     line: { flex: 1, height: 1, backgroundColor: '#e5e5e5' },
     input: {
-        height: 48, borderColor: '#ddd', borderWidth: 1, borderRadius: 10, paddingHorizontal: 12,
+        fontSize: 16,
+        height: 48, borderColor: '#ddd', borderWidth: 1, borderRadius: 10, paddingHorizontal: 12, backgroundColor: '#fff'
     },
     primaryBtn: { backgroundColor: '#111827', paddingVertical: 12, borderRadius: 10, alignItems: 'center' },
     primaryText: { color: 'white', fontWeight: '700', fontSize: 16 },

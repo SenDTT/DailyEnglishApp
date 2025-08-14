@@ -1,6 +1,6 @@
 import { ReadingData } from "@/app/(reading)/reading";
 import { useState } from "react";
-import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Modal, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import ScoreRing from "../Common/ScoreRing";
 import SuggestionsView, { SuggestionsPayload } from "../Common/SuggestionView";
 import { ThemedText } from "../ThemedText";
@@ -125,7 +125,19 @@ export default function ResultAndReview({
             </View>
 
             <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
-                <SuggestionsView suggestions={suggestions} passageTitle={isShowPassages ? data.title : null} passage={isShowPassages ? data.passage : null} onClose={() => setOpen(false)} />
+                <View style={styles.overlay}>
+                    <View style={styles.sheet}>
+                        <View style={styles.grabber} />
+                        <ScrollView
+                            style={{ flex: 1 }}
+                            contentContainerStyle={styles.scrollContent}
+                            showsVerticalScrollIndicator
+                            keyboardShouldPersistTaps="handled"
+                        >
+                            <SuggestionsView suggestions={suggestions} passageTitle={isShowPassages ? data.title : null} passage={isShowPassages ? data.passage : null} onClose={() => setOpen(false)} />
+                        </ScrollView>
+                    </View>
+                </View>
             </Modal>
         </ThemedView>
     )
@@ -207,4 +219,39 @@ const styles = StyleSheet.create({
         borderColor: "red"
     },
     tagText: { fontSize: 12 },
+    overlay: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "flex-end", // or "center" if you want a centered card
+    },
+    sheet: {
+        maxHeight: "90%",     // <-- lets the ScrollView have room to scroll
+        width: "100%",
+        backgroundColor: "white",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingHorizontal: 16,
+        paddingTop: 8,
+        paddingBottom: 12,
+    },
+    grabber: {
+        alignSelf: "center",
+        width: 48,
+        height: 4,
+        borderRadius: 2,
+        backgroundColor: "#ccc",
+        marginBottom: 8,
+    },
+    scrollContent: {
+        paddingBottom: 24,    // space so content isn’t hidden behind the Close button
+    },
+    closeBtn: {
+        marginTop: 8,
+        alignSelf: "center",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 12,
+        backgroundColor: "#eee",
+    },
+    closeTxt: { fontWeight: "600" },
 });

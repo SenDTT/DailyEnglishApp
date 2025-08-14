@@ -136,6 +136,8 @@ const ss = StyleSheet.create({
         borderColor: '#ddd',
         borderRadius: 10,
         paddingHorizontal: 12,
+        fontSize: 16,
+        backgroundColor: '#fff',
     },
     primaryBtn: {
         backgroundColor: '#111827',

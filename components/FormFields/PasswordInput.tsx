@@ -31,9 +31,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 12,
         height: 48,
+        backgroundColor: '#fff',
     },
     input: {
         flex: 1,
         fontSize: 16,
+        backgroundColor: '#fff',
     },
 });
