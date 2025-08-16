@@ -39,6 +39,5 @@ const styles = StyleSheet.create({
         marginTop: 8,
         paddingHorizontal: 8,
         borderRadius: 8,
-        //maxHeight: 200,
     }
 });

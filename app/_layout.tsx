@@ -3,6 +3,8 @@ import { Stack, usePathname, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Platform, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
 
 // Amplify v6 config
 import { Amplify } from 'aws-amplify';
