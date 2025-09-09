@@ -66,6 +66,19 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+### Bare React Native
+
+```bash
+cd ios && pod install && cd ..
+open ios/\*.xcworkspace # open in Xcode (not .xcodeproj)
+```
+
+#### In Xcode: select a Simulator (e.g., iPhone 15) → ▶ (Cmd+R)
+
+#### or via CLI:
+
+npx react-native run-ios
+
 ## Get a fresh project
 
 When you're ready, run:

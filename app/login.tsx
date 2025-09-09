@@ -1,12 +1,12 @@
 // app/login.tsx
 import { AntDesign } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 // Amplify v6 imports (modular)
 import PasswordInput from '@/components/FormFields/PasswordInput';
-import { signIn, signInWithRedirect } from 'aws-amplify/auth';
+import { signIn, signInWithRedirect, signOut } from '@aws-amplify/auth';
 
 export default function LoginScreen() {
     const router = useRouter();
@@ -19,6 +19,13 @@ export default function LoginScreen() {
             await signInWithRedirect({ provider: 'Google' });
         } catch (e: any) {
             console.error('onGoogle', e);
+            if (e?.name === 'UserAlreadyAuthenticatedException') {
+                // B) or force re-auth:
+                await signOut(); // or signOut({ global: true })
+                onGoogle();
+                return;
+            }
+
             Alert.alert('Google login failed', e?.message ?? 'Unknown error');
         }
     }

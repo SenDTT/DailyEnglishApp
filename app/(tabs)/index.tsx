@@ -45,6 +45,7 @@ export default function HomeScreen() {
   }, [loading]);
 
   const fetchTodayResult = async () => {
+    console.log("Fetching today's result with token", token);
     try {
       const response = await axios.get(`${API_BASE}/getTodayQuizAndResult`, {
         headers: {

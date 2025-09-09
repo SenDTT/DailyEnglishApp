@@ -1,7 +1,7 @@
 // src/auth/AuthContext.tsx
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { fetchAuthSession, signOut as amplifySignOut } from "aws-amplify/auth";
+import { signOut as amplifySignOut, fetchAuthSession } from "aws-amplify/auth";
 import { Hub } from "aws-amplify/utils";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 type AuthCtx = {
     token: string | null;
@@ -78,4 +78,9 @@ export function useAuth() {
     const ctx = useContext(Ctx);
     if (!ctx) throw new Error("useAuth must be used inside <AuthProvider>");
     return ctx;
+}
+
+// If you must have a default export (for Expo Router):
+export default function Dummy() {
+    return null;
 }

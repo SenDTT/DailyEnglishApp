@@ -1,13 +1,14 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack, usePathname, useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Linking, Platform, useColorScheme, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Platform, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
 
 // Amplify v6 config
 import { Amplify } from 'aws-amplify';
+import * as Linking from 'expo-linking';
 import config from './aws-exports';
 
 // Auth helpers
@@ -18,6 +19,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { AuthProvider } from './context/AuthContext';
 if (Platform.OS !== 'web') WebBrowser.maybeCompleteAuthSession();
 
+// Configure  Amplify
 Amplify.configure({
   ...config,
   Auth: {
@@ -26,6 +28,7 @@ Amplify.configure({
       ...(config as any).Auth?.oauth ?? (config as any).oauth ?? {},
       // Needed for native (iOS/Android) Google Hosted UI
       urlOpener: async (url: string, redirectUrl: string) => {
+        console.log({ url, redirectUrl });
         if (Platform.OS === 'web') return;
         const res = await WebBrowser.openAuthSessionAsync(url, redirectUrl);
         if (res.type === 'success' && res.url) await Linking.openURL(res.url);

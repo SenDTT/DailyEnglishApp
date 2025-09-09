@@ -1,10 +1,8 @@
 // app/(tabs)/profile.tsx
 import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
-import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { useNavigation, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
-// app/(tabs)/profile.tsx (inside component)
-import { useNavigation } from 'expo-router';
 
 type UserAttrs = Awaited<ReturnType<typeof fetchUserAttributes>>; // TS infers the right shape
 
@@ -29,6 +27,7 @@ export default function ProfileScreen() {
             try {
                 await getCurrentUser(); // throws if not logged in
                 const a = await fetchUserAttributes(); // a: UserAttrs
+                console.log('User attributes', a);
                 setAttrs(a);
             } catch (err) {
                 router.replace('/login');
@@ -62,7 +61,7 @@ export default function ProfileScreen() {
             <Text style={s.title}>Profile</Text>
 
             <View style={s.card}>
-                <Row label="Username" value={attrs?.preferred_username || attrs?.nickname || '—'} />
+                <Row label="Username" value={attrs?.preferred_username || attrs?.name || attrs?.nickname || '—'} />
                 <Row label="Email" value={attrs?.email || '—'} />
                 <Row label="Phone" value={attrs?.phone_number || '—'} />
             </View>
