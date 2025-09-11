@@ -17,6 +17,7 @@ export default function LoginScreen() {
         try {
             // Hosted UI redirect (Google)
             await signInWithRedirect({ provider: 'Google' });
+            router.replace('/(tabs)');
         } catch (e: any) {
             console.error('onGoogle', e);
             if (e?.name === 'UserAlreadyAuthenticatedException') {

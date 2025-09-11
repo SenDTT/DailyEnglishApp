@@ -1,6 +1,7 @@
 // app/(tabs)/profile.tsx
 import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
 import { useNavigation, useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -39,12 +40,19 @@ export default function ProfileScreen() {
 
     async function onLogout() {
         try {
-            await signOut();
+            await signOut({ global: true, oauth: { redirectUrl: 'https://accounts.google.com/logout' } });
+            // window.location.replace('/login'); // ensure all state is cleared
         } catch (e) {
             console.log('Sign out error:', e);
         } finally {
+            // 2) clear Google
+            await WebBrowser.openAuthSessionAsync(
+                'https://accounts.google.com/Logout',
+                'dailyenglishapp://signout/',               // must be registered in your app
+                { preferEphemeralSession: false }           // share cookies with normal session
+            );
             console.log('onLogout - finally');
-            router.navigate('/login');
+            router.replace('/login');
         }
     }
 

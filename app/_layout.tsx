@@ -90,7 +90,7 @@ export default function RootLayout() {
   // Render different stacks based on auth instead of Redirect loops
   return (
     <AuthProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 50 : 0 }}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           {authed ? (
             <Stack screenOptions={{ headerShown: false }} initialRouteName="(tabs)">

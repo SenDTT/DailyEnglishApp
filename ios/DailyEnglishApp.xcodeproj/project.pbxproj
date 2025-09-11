@@ -8,23 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2E58C4A29B6B2141602FED23 /* libPods-DailyEnglishApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7CA3FCB2F941A662DFBD77 /* libPods-DailyEnglishApp.a */; };
+		3CF0C5B0CBD22FCC565DCDDD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1D10E91399746AFE5046638D /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		62BDE1561172C784D767DD9B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4FE5F97AC0E1EA731E7595E0 /* PrivacyInfo.xcprivacy */; };
-		65C0A6AD4C48304C2EEA050D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC9220E0B7C698E682E9888 /* ExpoModulesProvider.swift */; };
-		B99DF4FF3EDD2AE538F338B9 /* libPods-DailyEnglishApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88229000A7BA257F32C1E1C8 /* libPods-DailyEnglishApp.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		EA7537F8F900215CCB6D3702 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F59B67B5B6B017768E17F79 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0EC9220E0B7C698E682E9888 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DailyEnglishApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DailyEnglishApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyEnglishApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DailyEnglishApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DailyEnglishApp/Info.plist; sourceTree = "<group>"; };
-		396599D8E34DD9EC5B0B6993 /* Pods-DailyEnglishApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyEnglishApp.debug.xcconfig"; path = "Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4FE5F97AC0E1EA731E7595E0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = DailyEnglishApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		77DE03356427FC8E6E1703C7 /* Pods-DailyEnglishApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyEnglishApp.release.xcconfig"; path = "Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp.release.xcconfig"; sourceTree = "<group>"; };
-		88229000A7BA257F32C1E1C8 /* libPods-DailyEnglishApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DailyEnglishApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D10E91399746AFE5046638D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = DailyEnglishApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		455A8961CF2BC683CB094396 /* Pods-DailyEnglishApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyEnglishApp.release.xcconfig"; path = "Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp.release.xcconfig"; sourceTree = "<group>"; };
+		5A7CA3FCB2F941A662DFBD77 /* libPods-DailyEnglishApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DailyEnglishApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F59B67B5B6B017768E17F79 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DailyEnglishApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		A1120944EACCF1DF3E2F13AA /* Pods-DailyEnglishApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyEnglishApp.debug.xcconfig"; path = "Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = DailyEnglishApp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B99DF4FF3EDD2AE538F338B9 /* libPods-DailyEnglishApp.a in Frameworks */,
+				2E58C4A29B6B2141602FED23 /* libPods-DailyEnglishApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				4FE5F97AC0E1EA731E7595E0 /* PrivacyInfo.xcprivacy */,
+				1D10E91399746AFE5046638D /* PrivacyInfo.xcprivacy */,
 			);
 			name = DailyEnglishApp;
 			sourceTree = "<group>";
@@ -62,18 +62,27 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				88229000A7BA257F32C1E1C8 /* libPods-DailyEnglishApp.a */,
+				5A7CA3FCB2F941A662DFBD77 /* libPods-DailyEnglishApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		30CF7E5AB2978F0A66525CDF /* Pods */ = {
+		3D7EB2947CAA22115550668A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				396599D8E34DD9EC5B0B6993 /* Pods-DailyEnglishApp.debug.xcconfig */,
-				77DE03356427FC8E6E1703C7 /* Pods-DailyEnglishApp.release.xcconfig */,
+				A1120944EACCF1DF3E2F13AA /* Pods-DailyEnglishApp.debug.xcconfig */,
+				455A8961CF2BC683CB094396 /* Pods-DailyEnglishApp.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		3F717CD3789B1A1D1730D514 /* DailyEnglishApp */ = {
+			isa = PBXGroup;
+			children = (
+				6F59B67B5B6B017768E17F79 /* ExpoModulesProvider.swift */,
+			);
+			name = DailyEnglishApp;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -90,8 +99,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				94E5F2D0CEB7DF291782C495 /* ExpoModulesProviders */,
-				30CF7E5AB2978F0A66525CDF /* Pods */,
+				BA0DBDC140C4E90274806CF7 /* ExpoModulesProviders */,
+				3D7EB2947CAA22115550668A /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -106,10 +115,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		94E5F2D0CEB7DF291782C495 /* ExpoModulesProviders */ = {
+		BA0DBDC140C4E90274806CF7 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				C7E4A3814A1953361BE0794C /* DailyEnglishApp */,
+				3F717CD3789B1A1D1730D514 /* DailyEnglishApp */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
@@ -123,14 +132,6 @@
 			path = DailyEnglishApp/Supporting;
 			sourceTree = "<group>";
 		};
-		C7E4A3814A1953361BE0794C /* DailyEnglishApp */ = {
-			isa = PBXGroup;
-			children = (
-				0EC9220E0B7C698E682E9888 /* ExpoModulesProvider.swift */,
-			);
-			name = DailyEnglishApp;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,14 +139,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DailyEnglishApp" */;
 			buildPhases = (
-				6CC4537A2F3811AA0EC4DE20 /* [CP] Check Pods Manifest.lock */,
-				F8CA57D043FA207900E7C9BB /* [Expo] Configure project */,
+				F1ED7B32F773A198F042F15C /* [CP] Check Pods Manifest.lock */,
+				AEC1C97EFE0AEB4974CD3187 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				F2276D92DBA632241B3F1427 /* [CP] Embed Pods Frameworks */,
-				441CFC44F73C1A00161F8520 /* [CP] Copy Pods Resources */,
+				CA2729C4B1618A31B6D22DD2 /* [CP] Embed Pods Frameworks */,
+				419BF221673EA6B18C3ACAC2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				62BDE1561172C784D767DD9B /* PrivacyInfo.xcprivacy in Resources */,
+				3CF0C5B0CBD22FCC565DCDDD /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +218,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\nif [[ -z \"$ENTRY_FILE\" ]]; then\n  # Set the entry JS file using the bundler's entry resolution.\n  export ENTRY_FILE=\"$(\"$NODE_BINARY\" -e \"require('expo/scripts/resolveAppEntry')\" \"$PROJECT_ROOT\" ios absolute | tail -n 1)\"\nfi\n\nif [[ -z \"$CLI_PATH\" ]]; then\n  # Use Expo CLI\n  export CLI_PATH=\"$(\"$NODE_BINARY\" --print \"require.resolve('@expo/cli', { paths: [require.resolve('expo/package.json')] })\")\"\nfi\nif [[ -z \"$BUNDLE_COMMAND\" ]]; then\n  # Default Expo CLI command for bundling\n  export BUNDLE_COMMAND=\"export:embed\"\nfi\n\n# Source .xcode.env.updates if it exists to allow\n# SKIP_BUNDLING to be unset if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.updates\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.updates\"\nfi\n# Source local changes to allow overrides\n# if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
 		};
-		441CFC44F73C1A00161F8520 /* [CP] Copy Pods Resources */ = {
+		419BF221673EA6B18C3ACAC2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -259,7 +260,44 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6CC4537A2F3811AA0EC4DE20 /* [CP] Check Pods Manifest.lock */ = {
+		AEC1C97EFE0AEB4974CD3187 /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-DailyEnglishApp/expo-configure-project.sh\"\n";
+		};
+		CA2729C4B1618A31B6D22DD2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1ED7B32F773A198F042F15C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -281,43 +319,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2276D92DBA632241B3F1427 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyEnglishApp/Pods-DailyEnglishApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F8CA57D043FA207900E7C9BB /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-DailyEnglishApp/expo-configure-project.sh\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -326,7 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				65C0A6AD4C48304C2EEA050D /* ExpoModulesProvider.swift in Sources */,
+				EA7537F8F900215CCB6D3702 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,22 +336,19 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 396599D8E34DD9EC5B0B6993 /* Pods-DailyEnglishApp.debug.xcconfig */;
+			baseConfigurationReference = A1120944EACCF1DF3E2F13AA /* Pods-DailyEnglishApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DailyEnglishApp/DailyEnglishApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6C7295RYK2;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = DailyEnglishApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DailyEnglishApp;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -374,17 +372,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77DE03356427FC8E6E1703C7 /* Pods-DailyEnglishApp.release.xcconfig */;
+			baseConfigurationReference = 455A8961CF2BC683CB094396 /* Pods-DailyEnglishApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DailyEnglishApp/DailyEnglishApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6C7295RYK2;
 				INFOPLIST_FILE = DailyEnglishApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DailyEnglishApp;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
