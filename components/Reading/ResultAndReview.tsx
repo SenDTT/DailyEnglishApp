@@ -1,6 +1,7 @@
 import { ReadingData } from "@/app/(reading)/reading";
 import { useState } from "react";
-import { Modal, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import Modal from "react-native-modal";
 import ScoreRing from "../Common/ScoreRing";
 import SuggestionsView, { SuggestionsPayload } from "../Common/SuggestionView";
 import { ThemedText } from "../ThemedText";
@@ -124,19 +125,21 @@ export default function ResultAndReview({
                 </TouchableOpacity>
             </View>
 
-            <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
-                <View style={styles.overlay}>
-                    <View style={styles.sheet}>
-                        <View style={styles.grabber} />
-                        <ScrollView
-                            style={{ flex: 1 }}
-                            contentContainerStyle={styles.scrollContent}
-                            showsVerticalScrollIndicator
-                            keyboardShouldPersistTaps="handled"
-                        >
-                            <SuggestionsView suggestions={suggestions} passageTitle={isShowPassages ? data.title : null} passage={isShowPassages ? data.passage : null} onClose={() => setOpen(false)} />
-                        </ScrollView>
-                    </View>
+            <Modal isVisible={open}
+                onBackdropPress={() => setOpen(false)}
+                onSwipeComplete={() => setOpen(false)}
+                swipeDirection="down"
+                style={{ justifyContent: "flex-end", margin: 0 }}>
+                <View style={styles.sheet}>
+                    <View style={styles.grabber} />
+                    <ScrollView
+                        style={{ flex: 1 }}
+                        contentContainerStyle={styles.scrollContent}
+                        showsVerticalScrollIndicator
+                        keyboardShouldPersistTaps="handled"
+                    >
+                        <SuggestionsView suggestions={suggestions} passageTitle={isShowPassages ? data.title : null} passage={isShowPassages ? data.passage : null} onClose={() => setOpen(false)} />
+                    </ScrollView>
                 </View>
             </Modal>
         </ThemedView>
@@ -225,12 +228,12 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end", // or "center" if you want a centered card
     },
     sheet: {
-        maxHeight: "90%",     // <-- lets the ScrollView have room to scroll
+        height: "90%",
         width: "100%",
         backgroundColor: "white",
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        paddingHorizontal: 16,
+        paddingHorizontal: 8,
         paddingTop: 8,
         paddingBottom: 12,
     },

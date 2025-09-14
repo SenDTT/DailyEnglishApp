@@ -8,7 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import Constants from "expo-constants";
 import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, Modal, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import Modal from "react-native-modal";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { IQuizObject } from "../(reading)/reading";
 import ScoreRing from "../../components/Common/ScoreRing";
@@ -100,7 +101,6 @@ export default function ResultListScreen() {
       <ThemedView
         style={{
           padding: 12,
-          marginBottom: 10,
           borderBottomWidth: 1,
           borderBottomColor: "#eee",
           backgroundColor: "white",
@@ -194,39 +194,40 @@ export default function ResultListScreen() {
       />
 
       <Modal
-        visible={!!openDetail}
-        transparent
-        animationType="slide"
-        onRequestClose={() => setOpenDetail(null)}
+        isVisible={!!openDetail}
+        onBackdropPress={() => setOpenDetail(null)}
+        onSwipeComplete={() => setOpenDetail(null)}
+        // swipeDirection="down"
+        style={{ margin: 0, justifyContent: "flex-end" }}
       >
-        <View style={styles.overlay}>
-          <View style={styles.sheet}>
-            <View style={styles.grabber} />
-            <ScrollView
-              style={{ flex: 1 }}
-              contentContainerStyle={styles.scrollContent}
-              showsVerticalScrollIndicator
-              keyboardShouldPersistTaps="handled"
-            >
-              {openDetail && (
-                <ResultAndReview
-                  title={`Result of ${openDetail.date}`}
-                  data={{
-                    quiz: openDetail.passage.quiz,
-                    title: openDetail.passage.title,
-                    passage: openDetail.passage.passage,
-                    date: openDetail.date,
-                    vocabulary: [],
-                  }}
-                  score={openDetail.clientScore}
-                  answers={openDetail.answers}
-                  suggestions={openDetail.suggestions}
-                  isShowPassages={true}
-                />
-              )}
-            </ScrollView>
-          </View>
+        {/* <View style={styles.overlay}> */}
+        <View style={styles.sheet}>
+          <View style={styles.grabber} />
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator
+            keyboardShouldPersistTaps="handled"
+          >
+            {openDetail && (
+              <ResultAndReview
+                title={`Result of ${openDetail.date}`}
+                data={{
+                  quiz: openDetail.passage.quiz,
+                  title: openDetail.passage.title,
+                  passage: openDetail.passage.passage,
+                  date: openDetail.date,
+                  vocabulary: [],
+                }}
+                score={openDetail.clientScore}
+                answers={openDetail.answers}
+                suggestions={openDetail.suggestions}
+                isShowPassages={true}
+              />
+            )}
+          </ScrollView>
         </View>
+        {/* </View> */}
       </Modal>
     </ThemedView>
   );
@@ -237,15 +238,15 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end", // or "center" if you want a centered card
+    justifyContent: "flex-end",
   },
   sheet: {
-    maxHeight: "90%",     // <-- lets the ScrollView have room to scroll
+    height: "90%",
     width: "100%",
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
     paddingTop: 8,
     paddingBottom: 12,
   },
@@ -258,7 +259,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   scrollContent: {
-    paddingBottom: 24,    // space so content isn’t hidden behind the Close button
+    paddingBottom: 24,
   },
   closeBtn: {
     marginTop: 8,
